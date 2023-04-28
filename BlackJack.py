@@ -1,4 +1,4 @@
-from Card_class import Card
+from oop import Card
 import random
 import subprocess  # needed to clear the console
 
@@ -159,21 +159,94 @@ def after_math():
     subprocess.call('cls', shell=True)
     print_funct("ending")
 
+    # Check if both hands are less than or equal to 21
     if get_hand(both_Card[1]) < 22 and get_hand(both_Card[0]) < 22:
+        # Check if both hands have the same value
         if get_hand(both_Card[1]) == get_hand(both_Card[0]):
             print("\nGuess that we're even now, Good Game")
+        # Check if dealer's hand is less than the player's hand
         elif get_hand(both_Card[1]) < get_hand(both_Card[0]):
             print("\nYou've won  :))")
+            return 'WIN'
+        # Dealer's hand is greater than player's hand
         else:
             print("\nUnlucky :<")
+            return 'LOSE'
+    # Check if dealer's hand is greater than 21 and player's hand is less than or equal to 21
     elif get_hand(both_Card[1]) > 21 and get_hand(both_Card[0]) < 22:
         print("\nCheers, you won >_<")
+        return 'WIN'
+    # Check if player's hand is greater than 21 and dealer's hand is less than or equal to 21
     elif get_hand(both_Card[1]) < 22 and get_hand(both_Card[0]) > 21:
         print("\nForget it :______")
+        return 'LOSE'
+    # Neither the player nor the dealer wins
     else:
         print("\nOk never-mind that")
 
 
-make_list_of_card()
-card_deal()
-after_math()
+def balance_monitor():
+    # Set the initial player balance to 10000
+    player_balance = 10000
+
+    # Keep playing while the player has money left
+    while player_balance > 0:
+        # Display the player's current balance
+        print("You're currently have: " + str(player_balance) + " dollars")
+
+        # Ask the player how much they want to bet
+        bet_val = int(input("How much you want to bet: "))
+
+        # If the bet is higher than the player's available funds, issue a warning
+        if bet_val > player_balance:
+            print("Warning: Your input amount is higher than your available funds.")
+        else:
+            # Otherwise, proceed with the game
+            make_list_of_card()
+            card_deal()
+            player_status = after_math()
+
+            # If the player wins, add the bet amount to their balance
+            if player_status == 'WIN':
+                player_balance += bet_val
+
+            # If the player loses, subtract the bet amount from their balance
+            elif player_status == 'LOSE':
+                player_balance -= bet_val
+
+            # If it's a tie, do nothing
+            else:
+                player_balance += 0
+
+            # Display the player's updated balance
+            print("\nYour balance is: " + str(player_balance))
+
+            # Clear the cards from the game
+            for sub_list in both_Card:
+                sub_list.clear()
+
+            # Ask the player if they want to play another round
+            while True:
+                opinion = input("\nAnother round (Y/N) ?  ")
+                subprocess.call('cls', shell=True)
+
+                # If they enter an invalid letter, ask again
+                if opinion not in ('Y', 'N'):
+                    print("Wrong letter, choose again !!!")
+                else:
+                    break
+
+            # If they choose not to play another round, exit the loop
+            if opinion == 'N':
+                break
+
+    # Display the player's final balance
+    print("Your total balance is now:  " + str(player_balance) + "dollars")
+
+
+# Call the balance_monitor function to start the game
+balance_monitor()
+
+
+
+
