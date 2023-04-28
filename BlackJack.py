@@ -248,5 +248,6 @@ def balance_monitor():
 balance_monitor()
 
 
-# hello
+#    ********** WHERE I LEFT  ***************
+#    I still need an opening scene or just simply improve the interface
 
