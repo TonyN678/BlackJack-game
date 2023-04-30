@@ -1,4 +1,4 @@
-from oop import Card
+from Card_class import Card
 import random
 import subprocess  # needed to clear the console
 
@@ -219,7 +219,7 @@ def balance_monitor():
                 player_balance += 0
 
             # Display the player's updated balance
-            print("\nYour balance is: " + str(player_balance))
+            print("\nYour balance is: " + str(player_balance) + " dollars")
 
             # Clear the cards from the game
             for sub_list in both_Card:
@@ -227,6 +227,10 @@ def balance_monitor():
 
             # Ask the player if they want to play another round
             while True:
+
+                if player_balance == 0:
+                    break
+
                 opinion = input("\nAnother round (Y/N) ?  ")
                 subprocess.call('cls', shell=True)
 
@@ -241,7 +245,7 @@ def balance_monitor():
                 break
 
     # Display the player's final balance
-    print("Your total balance is now:  " + str(player_balance) + "dollars")
+    print("\nYour total balance is now:  " + str(player_balance) + " dollars.\n\n\t\t'''''You're bankrupt'''''")
 
 
 # Call the balance_monitor function to start the game
