@@ -1,6 +1,5 @@
 # BlackJack-game
 
-This program is developed by Tien Nguyen.
 
 
 
