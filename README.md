@@ -18,7 +18,10 @@ If the dealer busts, all remaining players win. If the dealer does not bust, the
 
 
 This program is still in testing, more upcomming features will be:
-There will be currency in this game where player can bet based on their interests.
+- There will be currency in this game where player can bet based on their interests.
+- Reformat the code into OOP style.
+- Add GUI using Pygame.
+
 
 <h3>Reference</h3>
 https://opengameart.org/content/playing-cards-vector-png
